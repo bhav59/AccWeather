@@ -6,6 +6,25 @@ const weatherCardsDiv = document.querySelector(".weather-cards");
 
 const API_KEY = "bd5e378503939ddaee76f12ad7a97608";
 
+async function fetchDateTime() {
+  try {
+      const response = await fetch('http://worldtimeapi.org/api/ip');
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const dateTime = data.datetime;
+
+     
+      document.getElementById('date-time').textContent = `${dateTime}`;
+  } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+
+fetchDateTime();
+
 const createWeatherCard = (cityName, weatherItem, index) => {
   if (index === 0) {
     return `<div class="details">
